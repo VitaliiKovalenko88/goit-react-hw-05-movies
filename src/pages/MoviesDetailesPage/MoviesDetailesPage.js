@@ -1,34 +1,29 @@
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from 'react';
 
 import {
-  useHistory,
   useParams,
   useLocation,
   Link,
-  Routes,
-  Route,
   Outlet,
-  useRouteMatch,
-} from "react-router-dom";
-import { Cast } from "../Cast/Cast";
-import { Reviews } from "../Reviews/Reviews";
-import { fetchDetaileMovie } from "../../serviceApi/servisApi";
+  NavLink,
+} from 'react-router-dom';
+// import { Cast } from "../Cast/Cast";
+// import { Reviews } from "../Reviews/Reviews";
+import { fetchDetaileMovie } from '../../serviceApi/servisApi';
 
 export const MoviesDetaile = () => {
   const [movie, setFilm] = useState([]);
 
-  const { movieId } = useParams();
-  const { url, path } = useRouteMatch();
-  const history = useHistory();
   const location = useLocation();
-  
+  const { movieId } = useParams();
+  const path = location.state;
 
   useEffect(() => {
     fetchDetaileMovie(movieId)
       .then(({ data }) => {
         setFilm(data);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }, [movieId]);
@@ -42,14 +37,11 @@ export const MoviesDetaile = () => {
     genres = [],
   } = movie;
 
-  const onGoBack = () => {
-    history.push(location?.state?.from ?? "/films");
-  };
   return (
     <>
-      <button type="button" onClick={onGoBack}>
-        Go back
-      </button>
+      {path && (
+        <Link to={path.from.pathname === '/' ? '/' : '/movies'}>Go back</Link>
+      )}
 
       <div>
         <div>
@@ -73,30 +65,20 @@ export const MoviesDetaile = () => {
               .map(({ name }) => {
                 return name;
               })
-              .join(", ")}
+              .join(', ')}
           </p>
           <h3>Additional information</h3>
           <ul>
             <li>
-              <Link to={`${url}/cast`}>Cast</Link>
+              <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
             </li>
             <li>
-              <Link to={`${url}/review`}>Reviews</Link>
+              <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
             </li>
           </ul>
-          <Outlet/>
+          <Outlet />
         </div>
       </div>
-      <Routes>
-        <Route path={`${path}/cast`}>
-          <Cast />
-        </Route>
-        <Route path={`${path}/review`}>
-          <Reviews />
-        </Route>
-      </Routes>
-
-      
     </>
   );
 };

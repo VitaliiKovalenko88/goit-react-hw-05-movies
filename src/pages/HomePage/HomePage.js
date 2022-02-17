@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
-import { Link,  useLocation } from "react-router-dom";
-import { fetchTrendingMovies } from "../../serviceApi/servisApi";
-import { mapper } from "../../helpers/getPop";
-import { Button } from "../../components/Button/Button";
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { fetchTrendingMovies } from '../../serviceApi/servisApi';
+import { mapper } from '../../helpers/getPop';
+import { Button } from '../../components/Button/Button';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Gellery = styled.ul`
   display: flex;
@@ -15,34 +15,31 @@ const Gellery = styled.ul`
 export const HomePage = () => {
   const [page, setPage] = useState(1);
   const [trendiingMovies, setTrendiingMovies] = useState([]);
-  
   const location = useLocation();
 
   useEffect(() => {
     fetchTrendingMovies(page)
       .then(({ data }) => {
-        setTrendiingMovies((prevFilms) => [
+        setTrendiingMovies(prevFilms => [
           ...prevFilms,
           ...mapper(data.results),
         ]);
       })
-      .catch((error) => console.log(error));
+      .catch(error => console.log(error));
   }, [page]);
 
   const onLoadMore = () => {
-    setPage((prevPage) => prevPage + 1);
+    setPage(prevPage => prevPage + 1);
   };
 
   return (
-    <>
+    <main>
       <h1>Trends today</h1>
       <Gellery>
         {trendiingMovies.map(({ backdrop_path, title, id }) => {
           return (
             <li key={id}>
-              <Link
-                to={{ pathname: `movies/${id}`, state: { from: location } }}
-              >
+              <Link to={`movies/${id}`} state={{ from: location }}>
                 <div>
                   <img
                     src={`https://image.tmdb.org/t/p/w400/${backdrop_path}`}
@@ -57,6 +54,6 @@ export const HomePage = () => {
       </Gellery>
 
       <Button onLoadMore={onLoadMore} />
-    </>
+    </main>
   );
 };

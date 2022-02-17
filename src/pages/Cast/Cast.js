@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { fetchMovieCast } from "../../serviceApi/servisApi";
-import movie from "../../image/movie.jpg";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { fetchMovieCast } from '../../serviceApi/servisApi';
+import movie from '../../image/movie.jpg';
 
 export const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -9,8 +9,7 @@ export const Cast = () => {
 
   useEffect(() => {
     fetchMovieCast(movieId).then(({ cast }) => {
-      console.log(cast);
-      setCast((prevCast) => [...prevCast, ...cast]);
+      setCast(prevCast => [...prevCast, ...cast]);
     });
   }, [movieId]);
   return (
@@ -32,6 +31,7 @@ export const Cast = () => {
                 )}
               </div>
               <h3>{original_name}</h3>
+              <p>{character}</p>
             </li>
           );
         })}

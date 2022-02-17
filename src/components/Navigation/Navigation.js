@@ -1,22 +1,21 @@
-import { Link,Outlet } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom';
 
 export const Navigation = () => {
   return (
-    <header>
-      <div>
+    <div>
+      <header>
         <nav>
           <ul>
             <li>
-              <Link to="/" exact>
-                Home
-              </Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link to="/movies">Movies</Link>
             </li>
           </ul>
         </nav>
-      </div>
-    </header>
+      </header>
+      <Outlet />
+    </div>
   );
 };
