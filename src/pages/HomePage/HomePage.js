@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { fetchTrendingMovies } from '../../serviceApi/servisApi';
 import { mapper } from '../../helpers/getPop';
-import { Button } from '../../components/Button/Button';
+import { Button } from 'components/Button/Button';
 
 import styled from 'styled-components';
 
@@ -12,9 +12,9 @@ const Gellery = styled.ul`
   justify-content: space-around;
 `;
 
-export const HomePage = () => {
+const HomePage = () => {
   const [page, setPage] = useState(1);
-  const [trendiingMovies, setTrendiingMovies] = useState([]);
+  const [trendingMovies, setTrendiingMovies] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const HomePage = () => {
     <main>
       <h1>Trends today</h1>
       <Gellery>
-        {trendiingMovies.map(({ backdrop_path, title, id }) => {
+        {trendingMovies.map(({ backdrop_path, title, id }) => {
           return (
             <li key={id}>
               <Link to={`movies/${id}`} state={{ from: location }}>
@@ -57,3 +57,5 @@ export const HomePage = () => {
     </main>
   );
 };
+
+export default HomePage;

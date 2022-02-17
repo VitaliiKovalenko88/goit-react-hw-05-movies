@@ -11,7 +11,7 @@ import {
 // import { Reviews } from "../Reviews/Reviews";
 import { fetchDetaileMovie } from '../../serviceApi/servisApi';
 
-export const MoviesDetaile = () => {
+const MoviesDetaile = () => {
   const [movie, setFilm] = useState([]);
 
   const location = useLocation();
@@ -82,3 +82,5 @@ export const MoviesDetaile = () => {
     </>
   );
 };
+
+export default MoviesDetaile;

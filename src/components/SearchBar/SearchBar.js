@@ -1,22 +1,23 @@
-import { useState } from "react";
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-export const SearchBar = (props) => {
-  const [query, setQuery] = useState("");
+export const SearchBar = props => {
+  const [query, setQuery] = useState('');
 
-  const handleSubmite = (e) => {
+  const handleSubmite = e => {
     e.preventDefault();
 
-    if (query.trim() === "") {
-      alert("write something please!!!");
+    if (query.trim() === '') {
+      alert('write something please!!!');
       return;
     }
 
     props.onSubmite(query);
 
-    setQuery("");
+    setQuery('');
   };
 
-  const handleNameChange = (e) => {
+  const handleNameChange = e => {
     const { value } = e.currentTarget;
     setQuery(value);
   };
@@ -34,4 +35,8 @@ export const SearchBar = (props) => {
       <button type="submit">search</button>
     </form>
   );
+};
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func,
 };

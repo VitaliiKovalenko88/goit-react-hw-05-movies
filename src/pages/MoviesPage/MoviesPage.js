@@ -4,7 +4,7 @@ import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { fetchMovieByQuery } from '../../serviceApi/servisApi';
 import movie from '../../image/movie.jpg';
 
-export const MoviesPage = () => {
+const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -50,3 +50,5 @@ export const MoviesPage = () => {
     </>
   );
 };
+
+export default MoviesPage;
