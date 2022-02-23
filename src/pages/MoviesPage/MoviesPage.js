@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { fetchMovieByQuery } from '../../serviceApi/servisApi';
 import notFound from '../../image/NotFound.jpg';

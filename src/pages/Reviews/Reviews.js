@@ -5,7 +5,7 @@ import { ReviewsItem, ReviewsText, SubTitle, Title } from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
-  const [error, setError] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
 
@@ -15,9 +15,8 @@ const Reviews = () => {
       .then(({ results }) => {
         setReviews(prevReviews => [...prevReviews, ...results]);
       })
-      .catch(() => setError('something went wrong, try again later'))
+      .catch(error => console.log(error))
       .finally(() => {
-        setError('');
         setIsLoading(false);
       });
   }, [movieId]);
