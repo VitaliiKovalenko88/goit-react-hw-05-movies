@@ -17,21 +17,20 @@ const Cast = () => {
   const { movieId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(cast);
   useEffect(() => {
     setIsLoading(true);
     fetchMovieCast(movieId)
       .then(({ cast }) => {
         setCast(prevCast => [...prevCast, ...cast]);
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => setIsLoading(false));
   }, [movieId]);
 
   return (
     <>
-      {isLoading ? (
-        <p>Content loading...</p>
-      ) : (
+      {isLoading ? <p>Content loading...</p> : null}
+      {!isLoading ? (
         <div>
           <Title>Actors</Title>
           <CastList>
@@ -60,7 +59,7 @@ const Cast = () => {
             })}
           </CastList>
         </div>
-      )}
+      ) : null}
     </>
   );
 };
