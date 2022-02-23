@@ -1,30 +1,47 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { fetchReviews } from '../../serviceApi/servisApi';
+import { ReviewsItem, ReviewsText, SubTitle, Title } from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
 
   useEffect(() => {
-    fetchReviews(movieId).then(({ results }) => {
-      setReviews(prevReviews => [...prevReviews, ...results]);
-    });
+    setIsLoading(true);
+    fetchReviews(movieId)
+      .then(({ results }) => {
+        setReviews(prevReviews => [...prevReviews, ...results]);
+      })
+      .catch(() => setError('something went wrong, try again later'))
+      .finally(() => {
+        setError('');
+        setIsLoading(false);
+      });
   }, [movieId]);
 
   return (
     <>
-      <h2>Reviews</h2>
-      <ul>
-        {reviews.map(({ id, content, author }) => {
-          return (
-            <li key={id}>
-              <h3>{author}</h3>
-              <p>{content}</p>
-            </li>
-          );
-        })}
-      </ul>
+      {isLoading && <p>Content loading...</p>}
+      {reviews.length !== 0 && !isLoading ? (
+        <div>
+          <Title>Reviews</Title>
+          <ul>
+            {reviews.map(({ id, content, author }) => {
+              return (
+                <ReviewsItem key={id}>
+                  <SubTitle>{author}</SubTitle>
+                  <ReviewsText>{content}</ReviewsText>
+                </ReviewsItem>
+              );
+            })}
+          </ul>
+        </div>
+      ) : (
+        <p>There are no reviews yet, be the first to leave it!!!</p>
+      )}
     </>
   );
 };

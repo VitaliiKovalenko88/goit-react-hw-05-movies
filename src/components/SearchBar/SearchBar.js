@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { FormMovie, InputMovie, SearchButton } from './SearchBar.styled';
 
 export const SearchBar = props => {
   const [query, setQuery] = useState('');
@@ -23,8 +24,8 @@ export const SearchBar = props => {
   };
 
   return (
-    <form onSubmit={handleSubmite}>
-      <input
+    <FormMovie onSubmit={handleSubmite}>
+      <InputMovie
         type="text"
         autoComplete="off"
         autoFocus
@@ -32,8 +33,8 @@ export const SearchBar = props => {
         value={query}
         onChange={handleNameChange}
       />
-      <button type="submit">search</button>
-    </form>
+      <SearchButton type="submit">search</SearchButton>
+    </FormMovie>
   );
 };
 

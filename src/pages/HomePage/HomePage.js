@@ -1,15 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 import { fetchTrendingMovies } from '../../serviceApi/servisApi';
 import { mapper } from '../../helpers/getPop';
 import { Button } from 'components/Button/Button';
+import { Container } from 'components/Container/Container';
+import {
+  Title,
+  MoviesList,
+  MoviesListItem,
+  Wrapper,
+  Image,
+  TitleItem,
+  MainEl,
+} from './HomePage.styled';
 
-import styled from 'styled-components';
-
-const Gellery = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+export const LinkEl = styled(Link)`
+  text-decoration: none;
 `;
 
 const HomePage = () => {
@@ -33,28 +40,32 @@ const HomePage = () => {
   };
 
   return (
-    <main>
-      <h1>Trends today</h1>
-      <Gellery>
-        {trendingMovies.map(({ backdrop_path, title, id }) => {
-          return (
-            <li key={id}>
-              <Link to={`movies/${id}`} state={{ from: location }}>
-                <div>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w400/${backdrop_path}`}
-                    alt={title}
-                  />
-                </div>
-                <h2>{title}</h2>
-              </Link>
-            </li>
-          );
-        })}
-      </Gellery>
+    <MainEl>
+      <Container>
+        <Title>Trends today</Title>
+        <>
+          <MoviesList>
+            {trendingMovies.map(({ poster_path, title, id }) => {
+              return (
+                <MoviesListItem key={id}>
+                  <LinkEl to={`movies/${id}`} state={{ from: location }}>
+                    <Wrapper>
+                      <Image
+                        src={`https://image.tmdb.org/t/p/w400/${poster_path}`}
+                        alt={title}
+                      />
+                    </Wrapper>
+                    <TitleItem>{title}</TitleItem>
+                  </LinkEl>
+                </MoviesListItem>
+              );
+            })}
+          </MoviesList>
+        </>
 
-      <Button onLoadMore={onLoadMore} />
-    </main>
+        <Button onLoadMore={onLoadMore} />
+      </Container>
+    </MainEl>
   );
 };
 

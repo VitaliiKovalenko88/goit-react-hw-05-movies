@@ -35,7 +35,8 @@ button {
 }
 
 ul, 
-ol {
+ol,
+li {
   list-style: none;
   margin: 0px;
   padding: 0px;

@@ -1,31 +1,40 @@
 import { useEffect, useState } from 'react';
+import { useParams, useLocation, Outlet } from 'react-router-dom';
+import { fetchDetaileMovie } from '../../serviceApi/servisApi';
 
 import {
-  useParams,
-  useLocation,
-  Link,
-  Outlet,
-  NavLink,
-} from 'react-router-dom';
-// import { Cast } from "../Cast/Cast";
-// import { Reviews } from "../Reviews/Reviews";
-import { fetchDetaileMovie } from '../../serviceApi/servisApi';
+  Wrapper,
+  BackLink,
+  ImgWrapper,
+  TextContentWrapper,
+  ImgEl,
+  Title,
+  Text,
+  SubTitle,
+  PagesList,
+  PageLink,
+} from './MoviesDetaliesPage.styled';
+import { Container } from 'components/Container/Container';
 
 const MoviesDetaile = () => {
   const [movie, setFilm] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
   const { movieId } = useParams();
   const path = location.state;
 
   useEffect(() => {
+    setIsLoading(true);
+
     fetchDetaileMovie(movieId)
       .then(({ data }) => {
         setFilm(data);
       })
       .catch(error => {
         console.log(error);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, [movieId]);
 
   const {
@@ -38,48 +47,58 @@ const MoviesDetaile = () => {
   } = movie;
 
   return (
-    <>
+    <Container>
       {path && (
-        <Link to={path.from.pathname === '/' ? '/' : '/movies'}>Go back</Link>
+        <BackLink to={path.from.pathname === '/' ? '/' : '/movies'}>
+          Go back
+        </BackLink>
       )}
+      {!path && <BackLink to={'/'}>Go back</BackLink>}
+      {isLoading ? <p>Content loading...</p> : null}
+      {!isLoading ? (
+        <Wrapper>
+          {poster_path ? (
+            <ImgWrapper>
+              <ImgEl
+                src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                alt={title}
+              />
+            </ImgWrapper>
+          ) : null}
+          <TextContentWrapper>
+            <Title>
+              {title} {release_date}
+            </Title>
+            <Text>
+              Use score: <span>{vote_average}</span>
+            </Text>
+            <SubTitle>Overview</SubTitle>
+            <Text>{overview} </Text>
+            <SubTitle>Genre</SubTitle>
+            <Text>
+              {genres
+                .map(({ name }) => {
+                  return name;
+                })
+                .join(', ')}
+            </Text>
 
-      <div>
-        <div>
-          <img
-            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-            alt={title}
-          />
-        </div>
-        <div>
-          <h2>
-            {title} {release_date}
-          </h2>
-          <p>
-            Use score: <span>{vote_average}</span>
-          </p>
-          <h3>Overview</h3>
-          <p>{overview} </p>
-          <h3>Genre</h3>
-          <p>
-            {genres
-              .map(({ name }) => {
-                return name;
-              })
-              .join(', ')}
-          </p>
-          <h3>Additional information</h3>
-          <ul>
-            <li>
-              <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
-            </li>
-            <li>
-              <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
-            </li>
-          </ul>
-          <Outlet />
-        </div>
-      </div>
-    </>
+            <SubTitle>Additional information</SubTitle>
+
+            <PagesList>
+              <li>
+                <PageLink to={`/movies/${movieId}/cast`}>Cast</PageLink>
+              </li>
+              <li>
+                <PageLink to={`/movies/${movieId}/reviews`}>Reviews</PageLink>
+              </li>
+            </PagesList>
+
+            <Outlet />
+          </TextContentWrapper>
+        </Wrapper>
+      ) : null}
+    </Container>
   );
 };
 

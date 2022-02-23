@@ -2,7 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { fetchMovieByQuery } from '../../serviceApi/servisApi';
-import movie from '../../image/movie.jpg';
+import notFound from '../../image/NotFound.jpg';
+import {
+  ImageMovie,
+  MovieItem,
+  MoviesList,
+  NameMovie,
+  Wrapper,
+} from './MoviePage.styled';
+import { Container } from 'components/Container/Container';
+import { LinkEl } from 'pages/HomePage/HomePage';
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
@@ -23,31 +32,33 @@ const MoviesPage = () => {
   };
 
   return (
-    <>
+    <Container>
       <SearchBar onSubmite={handleFormSubmite} />
-      <ul>
-        {movies.map(({ id, title, poster_path }) => {
-          return (
-            <li key={id}>
-              <Link to={`/movies/${id}`} state={{ from: location }}>
-                <div>
-                  {poster_path ? (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                      alt={title}
-                      width={150}
-                    />
-                  ) : (
-                    <img src={movie} alt="no poster" width={150} />
-                  )}
-                </div>
-                <p>{title}</p>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </>
+      <>
+        <MoviesList>
+          {movies.map(({ id, title, poster_path }) => {
+            return (
+              <MovieItem key={id}>
+                <LinkEl to={`/movies/${id}`} state={{ from: location }}>
+                  <Wrapper>
+                    {poster_path ? (
+                      <ImageMovie
+                        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                        alt={title}
+                        width={150}
+                      />
+                    ) : (
+                      <ImageMovie src={notFound} alt="no poster" width={150} />
+                    )}
+                  </Wrapper>
+                  <NameMovie>{title}</NameMovie>
+                </LinkEl>
+              </MovieItem>
+            );
+          })}
+        </MoviesList>
+      </>
+    </Container>
   );
 };
 
