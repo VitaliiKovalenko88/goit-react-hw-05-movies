@@ -19,10 +19,8 @@ import { Container } from 'components/Container/Container';
 const MoviesDetaile = () => {
   const [movie, setFilm] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const location = useLocation();
   const { movieId } = useParams();
-  const path = location.state;
 
   useEffect(() => {
     setIsLoading(true);
@@ -48,12 +46,8 @@ const MoviesDetaile = () => {
 
   return (
     <Container>
-      {path && (
-        <BackLink to={path.from.pathname === '/' ? '/' : '/movies'}>
-          Go back
-        </BackLink>
-      )}
-      {!path && <BackLink to={'/'}>Go back</BackLink>}
+      <BackLink to={location?.state?.from ?? '/'}>Go back</BackLink>
+
       {isLoading ? <p>Content loading...</p> : null}
       {!isLoading ? (
         <Wrapper>
@@ -87,13 +81,19 @@ const MoviesDetaile = () => {
 
             <PagesList>
               <li>
-                <PageLink to={`/movies/${movieId}/cast`}>Cast</PageLink>
+                <PageLink state={{ from: location?.state?.from }} to={`cast`}>
+                  Cast
+                </PageLink>
               </li>
               <li>
-                <PageLink to={`/movies/${movieId}/reviews`}>Reviews</PageLink>
+                <PageLink
+                  state={{ from: location?.state?.from }}
+                  to={`reviews`}
+                >
+                  Reviews
+                </PageLink>
               </li>
             </PagesList>
-
             <Outlet />
           </TextContentWrapper>
         </Wrapper>
