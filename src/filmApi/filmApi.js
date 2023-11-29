@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = '52102081be446c1b62679888583e10e9';
+const API_KEY = 'ea3bc943aa3fc0f55c10b5359222491e';
 const BASE_URL = 'https://api.themoviedb.org';
 axios.defaults.baseURL = BASE_URL;
 
@@ -9,3 +9,6 @@ const fetchTrendingMovies = async (page) => {
   const movies = await axios(url);
   console.log(movies)
 }
+export default fetchTrendingMovies
+
+fetchTrendingMovies(1)
