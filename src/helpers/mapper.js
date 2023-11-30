@@ -1,0 +1,1 @@
+export const mapper = arr => arr.map(({ poster_path, title, id }) => ({ poster_path, title, id }));

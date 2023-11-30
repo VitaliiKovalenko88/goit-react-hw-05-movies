@@ -7,8 +7,7 @@ axios.defaults.baseURL = BASE_URL;
 const fetchTrendingMovies = async (page) => {
   const url = `/3/trending/movie/day?api_key=${API_KEY}&page=${page}`;
   const movies = await axios(url);
-  console.log(movies)
+  return movies
 }
 export default fetchTrendingMovies
 
-fetchTrendingMovies(1)

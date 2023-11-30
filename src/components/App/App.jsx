@@ -1,13 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from 'pages/Home/Home';
-import fetchTrendingMovies from '../../filmApi/filmApi';
+import { MoviesLayot } from 'components/MoviesLayot/MoviesLayot';
+import { Movies } from 'pages/Movies/Movies';
 
 export const App = () => {
-  // fetchTrendingMovies(1);
   return (
     <div>
       <Routes>
-        <Route path="" element={<Home />} />
+        <Route path="/" element={<MoviesLayot />}>
+          <Route index element={<Home />} />
+          <Route path="movies" element={<Movies />}>
+            <Route path="" />
+          </Route>
+        </Route>
       </Routes>
     </div>
   );
