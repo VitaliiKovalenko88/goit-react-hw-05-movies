@@ -22,5 +22,15 @@ export const fetchMovieByQuery = async (query) => {
   return data;
 };
 
-export const fetchMovieCast = async (id) => { }
+export const fetchMovieCast = async (id) => {
+  const { data } = await axios.get(`/3/movie/${id}/credits?api_key=${API_KEY}`);
+
+  return data;
+}
+
+export const fetchMovieReviews = async (id) => {
+  const { data } = await axios.get(`/3/movie/${id}/reviews?api_key=${API_KEY}`);
+  return data;
+}
+
 

@@ -25,7 +25,7 @@ export const MovieDetal = () => {
 
   const { title, release_data, overview, poster_path, vote_average,
     genres = [] } = data;
-  console.log(title);
+
   return (
     <><div>
       <Link to={location?.state?.from ?? '/'}>Go back
