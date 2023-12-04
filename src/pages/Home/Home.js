@@ -1,10 +1,11 @@
 import { fetchTrendingMovies } from "filmApi/filmApi";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { mapper } from "helpers/mapper";
+import { MoviesList } from "components/MoviesList/MoviesList";
 
 const Home = () => {
-  const [movies, setMovies] = useState([]);
+  const [data, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const location = useLocation();
 
@@ -24,17 +25,7 @@ const Home = () => {
     <main>
       <div>
         <h1>Trends today</h1>
-        <ul>{movies.map(({ id, poster_path, title }) =>
-          <li key={id}>
-            <Link to=
-              {`movies/${id}`} state={{ from: location }} >
-              <div>
-                <img src={`https://image.tmdb.org/t/p/w400/${poster_path}`
-                } alt={title} width={200} />
-              </div>
-            </Link>
-          </li>)}
-        </ul>
+        <MoviesList movies={data} location={location} />
         <button onClick={onLoadMore}></button>
       </div>
     </main >
