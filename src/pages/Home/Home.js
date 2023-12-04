@@ -4,7 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 import { mapper } from "helpers/mapper";
 
 const Home = () => {
-
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const location = useLocation();
@@ -17,6 +16,10 @@ const Home = () => {
       .catch(error => console.log(`fetchTrendigMovies:${error}`)
       );
   }, [page]);
+
+  const onLoadMore = () => {
+    setPage(prevPage => prevPage + 1)
+  }
   return (
     <main>
       <div>
@@ -32,6 +35,7 @@ const Home = () => {
             </Link>
           </li>)}
         </ul>
+        <button onClick={onLoadMore}></button>
       </div>
     </main >
   )

@@ -8,21 +8,17 @@ export const Movies = () => {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
-  console.log(searchParams)
-  console.log(data)
+
   useEffect(() => {
     if (query) {
       fetchMovieByQuery(query).then(({ results }) => {
         setData(results);
-      }
-      )
+      })
     }
-
-
   }, [query])
 
-  const handleSubmite = (query) => {
-    setSearchParams({ query: query })
+  const handleSubmite = (value) => {
+    setSearchParams({ query: value })
   }
 
 

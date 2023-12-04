@@ -16,7 +16,7 @@ export const Cast = () => {
     fetchMovieCast(movieId)
       .then(({ cast }) => {
         // console.log(data);
-        setData(cast);
+        setData([...cast]);
       })
       .catch(error => console.log(error))
       .finally(() => setIsLoading(false));
