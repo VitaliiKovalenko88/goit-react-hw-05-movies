@@ -2,6 +2,7 @@ import { SearchBar } from 'components/SearchBar/SearchBar'
 import React, { useState, useEffect } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMovieByQuery } from 'filmApi/filmApi';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 
 export const Movies = () => {
   const [data, setData] = useState([]);
@@ -23,6 +24,9 @@ export const Movies = () => {
 
 
   return (
-    <SearchBar onSubmite={handleSubmite} />
+    <main>
+      <SearchBar onSubmite={handleSubmite} />
+      <MoviesList movies={data} location={location} />
+    </main>
   )
 }

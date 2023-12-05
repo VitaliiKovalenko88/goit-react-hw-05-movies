@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { mapper } from "helpers/mapper";
 import { MoviesList } from "components/MoviesList/MoviesList";
+import { Button } from "components/Button/Button";
 
 const Home = () => {
-  const [data, setMovies] = useState([]);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const location = useLocation();
 
   useEffect(() => {
     fetchTrendingMovies(page)
-      .then((({ data }) => {
-        setMovies([...mapper(data.results)]);
-      }))
-      .catch(error => console.log(`fetchTrendigMovies:${error}`)
-      );
+      .then(({ data: { results } }) => {
+        setData(prevData => [...prevData, ...mapper(results)]);
+      })
+      .catch(error => console.log(`fetchTrendigMovies:${error}`));
   }, [page]);
 
   const onLoadMore = () => {
@@ -26,9 +26,9 @@ const Home = () => {
       <div>
         <h1>Trends today</h1>
         <MoviesList movies={data} location={location} />
-        <button onClick={onLoadMore}></button>
+        <Button onLoadMore={onLoadMore} />
       </div>
-    </main >
+    </main>
   )
 }
 
