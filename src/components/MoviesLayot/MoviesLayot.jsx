@@ -1,16 +1,21 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import css from './MoviesLayot.module.css';
 
 export const MoviesLayot = () => {
   return (
     <>
-      <header>
-        <nav>
-          <ul>
+      <header className={css.header}>
+        <nav className={css.navigation}>
+          <ul className={css.navList}>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink className={css.navLink} to="/">
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="movies">Movies</NavLink>
+              <NavLink className={css.navLink} to="movies">
+                Movies
+              </NavLink>
             </li>
           </ul>
         </nav>

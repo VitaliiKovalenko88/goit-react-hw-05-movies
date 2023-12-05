@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { mapper } from "helpers/mapper";
 import { MoviesList } from "components/MoviesList/MoviesList";
 import { Button } from "components/Button/Button";
+import { Container } from "components/Container/Container";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -23,11 +24,11 @@ const Home = () => {
   }
   return (
     <main>
-      <div>
+      <Container>
         <h1>Trends today</h1>
         <MoviesList movies={data} location={location} />
         <Button onLoadMore={onLoadMore} />
-      </div>
+      </Container>
     </main>
   )
 }
