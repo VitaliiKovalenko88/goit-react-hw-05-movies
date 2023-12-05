@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const MoviesList = ({ movies, location }) => (
   <ul>
     {movies.map(({ id, poster_path, title }, index) => (
-      <li key={`${id}-${index}`}>
+      <li key={id}>
         <Link to={`movies/${id}`} state={{ from: location }}>
           <div>
             <img
