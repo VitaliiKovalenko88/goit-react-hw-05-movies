@@ -1,3 +1,4 @@
+// import { Container } from "components/Container/Container";
 import { fetchMovieDetal } from "filmApi/filmApi";
 import { useState, useEffect } from "react"
 import { Link, Outlet, useParams, useLocation } from "react-router-dom"
@@ -7,7 +8,7 @@ export const MovieDetal = () => {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const { movieId } = useParams();
-
+  console.log(useParams())
   useEffect(() => {
     setIsLoading(true);
 
@@ -25,11 +26,10 @@ export const MovieDetal = () => {
 
   const { title, release_data, overview, poster_path, vote_average,
     genres = [] } = data;
-  console.log(isLoading);
+
   return (
-    <><div>
-      <Link to={location?.state?.from ?? '/'}>Go back
-      </Link>
+    <div>
+      <Link to={location?.state?.from ?? '/'}>Go back</Link>
 
       <div>
         {poster_path
@@ -60,6 +60,8 @@ export const MovieDetal = () => {
         </div>
       </div>
     </div >
-    </>
+
+
+
   )
 }

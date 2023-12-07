@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from 'pages/Home/Home';
 import { MoviesLayot } from 'components/MoviesLayot/MoviesLayot';
 import { Movies } from 'pages/Movies/Movies';
@@ -17,7 +17,7 @@ export const App = () => {
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>
-          <Route path="*" element={<MoviesLayot />} />
+          <Route path="*" element={<Navigate to={'/'} />} />
         </Route>
       </Routes>
     </div>

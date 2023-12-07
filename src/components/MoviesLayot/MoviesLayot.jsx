@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import css from './MoviesLayot.module.css';
+import { Container } from 'components/Container/Container';
 
 export const MoviesLayot = () => {
   return (
@@ -20,7 +21,11 @@ export const MoviesLayot = () => {
           </ul>
         </nav>
       </header>
-      <Outlet />
+      <main>
+        <Container>
+          <Outlet />
+        </Container>
+      </main>
     </>
   );
 };
