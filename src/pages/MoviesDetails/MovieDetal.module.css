@@ -1,4 +1,4 @@
-.backLink {
+.back-link {
   margin-top: 10px;
   margin-bottom: 36px;
   text-align: center;
@@ -24,7 +24,7 @@
   transition: background-color 250ms ease-in-out;
 }
 
-.backLink:hover {
+.back-link:hover {
   background-color: #b14b06;
   transition: background-color 250ms ease-in-out;
 }
@@ -32,4 +32,55 @@
 .wrapper {
   display: flex;
   margin-bottom: 50px;
+}
+
+.img-wrapper {
+  max-width: 300px;
+  max-height: 500px;
+  margin-right: 50px;
+}
+
+.img {
+  border-radius: 5px;
+}
+
+.text-wrapper {
+  max-width: 475px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.title {
+  color: #ff6b08;
+  margin-bottom: 30px;
+}
+
+.text {
+  color: #3f4143;
+}
+
+.sub-title {
+  margin-bottom: 10px;
+  margin-top: 30px;
+  color: #3f4143;
+}
+
+.page-list {
+  display: flex;
+}
+
+.item:not(:last-child) {
+  margin-right: 30px;
+}
+
+.page-link {
+  display: inline-block;
+  padding: 15px;
+  font-weight: 500;
+  color: #3f4143;
+  font-size: 18px;
+}
+
+.page-link:active {
+  color: #ff6b08;
 }
