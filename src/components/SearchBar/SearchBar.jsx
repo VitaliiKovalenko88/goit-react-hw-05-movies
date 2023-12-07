@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-export const SearchBar = ({ onSubmite }) => {
+export const SearchBar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
 
   const handleChange = ({ target: { value } }) => {
     setQuery(value);
   };
 
-  const handleSubmite = e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     if (query.trim() === '') {
@@ -15,13 +15,13 @@ export const SearchBar = ({ onSubmite }) => {
       return;
     }
 
-    onSubmite(query);
+    onSubmit(query);
 
     setQuery('');
   };
 
   return (
-    <form onSubmit={handleSubmite}>
+    <form onSubmit={handleSubmit}>
       <label>Films</label>
       <input
         type="text"
@@ -30,7 +30,7 @@ export const SearchBar = ({ onSubmite }) => {
         value={query}
         onChange={handleChange}
       />
-      <button type="submite">search</button>
+      <button type="submit">search</button>
     </form>
   );
 };

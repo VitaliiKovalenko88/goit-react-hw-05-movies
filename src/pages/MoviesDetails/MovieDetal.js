@@ -1,16 +1,17 @@
-// import { Container } from "components/Container/Container";
+import css from "./MovieDetal.styled.css"
 import { fetchMovieDetal } from "filmApi/filmApi";
+import { defaultImg } from "helpers/defaultFoto";
 import { useState, useEffect } from "react"
 import { Link, Outlet, useParams, useLocation } from "react-router-dom"
 
 export const MovieDetal = () => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+
   const location = useLocation();
   const { movieId } = useParams();
   console.log(useParams())
   useEffect(() => {
-    setIsLoading(true);
+
 
     fetchMovieDetal(movieId)
       .then(({ data }) => {
@@ -19,7 +20,7 @@ export const MovieDetal = () => {
       .catch(error => {
         console.log(`fetchMovieDetail: ${error}`);
       })
-      .finally(() => setIsLoading(false));
+
 
   }, [movieId])
 
@@ -28,16 +29,15 @@ export const MovieDetal = () => {
     genres = [] } = data;
 
   return (
-    <div>
-      <Link to={location?.state?.from ?? '/'}>Go back</Link>
+    <>
+      <Link className={css.backLink} to={location?.state?.from ?? '/'}>Go back</Link>
 
-      <div>
-        {poster_path
-          ?
-          <div>
-            <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
-          </div>
-          : null}
+      <div className={css.wrapper}>
+        <div>
+          <img src={poster_path
+            ? `https://image.tmdb.org/t/p/w500${poster_path}` : defaultImg} alt={title} />
+        </div>
+
         <div>
           <h2>{title} {release_data}</h2>
           <p>Use score: <span>{vote_average}</span> </p>
@@ -59,7 +59,7 @@ export const MovieDetal = () => {
           <Outlet />
         </div>
       </div>
-    </div >
+    </>
 
 
 

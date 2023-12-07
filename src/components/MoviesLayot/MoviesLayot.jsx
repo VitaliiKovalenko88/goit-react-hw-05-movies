@@ -21,7 +21,7 @@ export const MoviesLayot = () => {
           </ul>
         </nav>
       </header>
-      <main>
+      <main className={css.main}>
         <Container>
           <Outlet />
         </Container>

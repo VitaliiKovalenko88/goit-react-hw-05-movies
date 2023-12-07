@@ -1,19 +1,25 @@
 import { Link, useLocation } from 'react-router-dom';
-
+import { defaultImg } from 'helpers/defaultFoto';
+import css from './MoviesList.module.css';
 export const MoviesList = ({ movies }) => {
-  const { location } = useLocation();
+  const { pathname } = useLocation();
   return (
-    <ul>
+    <ul className={css.list}>
       {movies.map(({ id, poster_path, title }) => (
-        <li key={id}>
-          <Link to={`movies/${id}`} state={{ from: location }}>
-            <div>
+        <li key={id} className={css.item}>
+          <Link to={`/movies/${id}`} state={{ from: pathname }}>
+            <div className={css.wrapper}>
               <img
-                src={`https://image.tmdb.org/t/p/w400/${poster_path}`}
+                className={css.img}
+                src={
+                  poster_path
+                    ? `https://image.tmdb.org/t/p/w400/${poster_path}`
+                    : defaultImg
+                }
                 alt={title}
-                width={200}
               />
             </div>
+            <p className={css.titleItem}>{title}</p>
           </Link>
         </li>
       ))}

@@ -1,26 +1,23 @@
 import { useState, useEffect } from 'react'
 import { SearchBar } from 'components/SearchBar/SearchBar'
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { fetchMovieByQuery } from 'filmApi/filmApi';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 // import { Container } from 'components/Container/Container';
 
 export const Movies = () => {
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(1)
-  const location = useLocation();
+  const [page] = useState(1)
+
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(searchParams);
-
-
-  const query = searchParams.get('film');
-  const handleSubmite = (value) => {
-    setSearchParams({ film: value })
+  const handleSubmit = (value) => {
+    setSearchParams({ query: value })
   }
 
   useEffect(() => {
-    const query = searchParams.get('query');
+    const query = searchParams.get('query') || '';
+
     if (!query) return;
     fetchMovieByQuery(query, page).then(({ results }) => {
 
@@ -30,12 +27,11 @@ export const Movies = () => {
   }, [searchParams, page])
 
 
-  console.log(data);
+
   return (
     <>
-      <SearchBar onSubmite={handleSubmite} />
+      <SearchBar onSubmit={handleSubmit} />
       {data.length > 0 && <MoviesList movies={data} />}
-
     </>
   )
 }
