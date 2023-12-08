@@ -1,6 +1,6 @@
 import { fetchTrendingMovies } from "filmApi/filmApi";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import { mapper } from "helpers/mapper";
 import { MoviesList } from "components/MoviesList/MoviesList";
 import { Button } from "components/Button/Button";
