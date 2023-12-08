@@ -14,7 +14,7 @@ export const MoviesLayot = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink className={css.navLink} to="movies">
+              <NavLink className={css.navLink} to="/movies">
                 Movies
               </NavLink>
             </li>
