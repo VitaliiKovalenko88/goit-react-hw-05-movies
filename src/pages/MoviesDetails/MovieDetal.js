@@ -65,3 +65,5 @@ export const MovieDetal = () => {
     </>
   )
 }
+
+export default MovieDetal;

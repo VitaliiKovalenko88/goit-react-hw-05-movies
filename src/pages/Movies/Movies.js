@@ -5,7 +5,7 @@ import { fetchMovieByQuery } from 'filmApi/filmApi';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 // import { Container } from 'components/Container/Container';
 
-export const Movies = () => {
+const Movies = () => {
   const [data, setData] = useState([]);
   const [page] = useState(1)
 
@@ -35,3 +35,5 @@ export const Movies = () => {
     </>
   )
 }
+
+export default Movies;

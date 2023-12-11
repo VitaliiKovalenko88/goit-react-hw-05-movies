@@ -6,7 +6,7 @@ import { fetchMovieCast } from 'filmApi/filmApi';
 const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
-export const Cast = () => {
+const Cast = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
@@ -50,3 +50,5 @@ export const Cast = () => {
     </>
   );
 };
+
+export default Cast;

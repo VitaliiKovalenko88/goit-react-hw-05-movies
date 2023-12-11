@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import css from './MoviesLayot.module.css';
 import { Container } from 'components/Container/Container';
@@ -23,7 +24,9 @@ export const MoviesLayot = () => {
       </header>
       <main className={css.main}>
         <Container>
-          <Outlet />
+          <Suspense>
+            <Outlet />
+          </Suspense>
         </Container>
       </main>
     </>
