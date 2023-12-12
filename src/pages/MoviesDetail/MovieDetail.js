@@ -10,7 +10,7 @@ export const MovieDetail = () => {
 
   const location = useLocation();
   const { movieId } = useParams();
-  console.log(useParams())
+
   useEffect(() => {
 
 

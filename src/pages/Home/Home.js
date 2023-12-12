@@ -28,7 +28,8 @@ const Home = () => {
     <>
       <h1 className={css.title} >Trends today</h1>
       <MoviesList movies={data} />
-      <Button onLoadMore={onLoadMore} />
+      {data.length > 0 && <Button onLoadMore={onLoadMore} />}
+
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-
+import css from './Cast.module.css'
 import { useParams } from 'react-router-dom';
 import { fetchMovieCast } from 'filmApi/filmApi';
 const defaultImg =
@@ -26,22 +26,22 @@ const Cast = () => {
     <>
       {!isLoading ? (
         <div>
-          <h2>Actors</h2>
-          <ul>
+          <h2 className={css.title} >Actors</h2>
+          <ul className={css.list} >
             {data.map(({ cast_id, original_name, profile_path, character }) => (
-              <li key={cast_id}>
-                <div>
+              <li className={css.item} key={cast_id}>
+                <div className={css.wrapper} >
                   {profile_path ? (
-                    <img
+                    <img className={css.img}
                       src={`https://image.tmdb.org/t/p/w500${profile_path}`}
                       alt={original_name}
                     />
                   ) : (
-                    <img src={defaultImg} alt={original_name} width={250} />
+                    <img className={css.img} src={defaultImg} alt={original_name} />
                   )}
                 </div>
-                <h3>{original_name}</h3>
-                <p>{character}</p>
+                <h3 className={css.nameTitle}>{original_name}</h3>
+                <p className={css.characterCast} >{character}</p>
               </li>
             ))}
           </ul>
