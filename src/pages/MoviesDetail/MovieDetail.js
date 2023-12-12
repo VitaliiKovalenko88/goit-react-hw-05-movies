@@ -3,9 +3,9 @@ import { fetchMovieDetal } from "filmApi/filmApi";
 import { defaultImg } from "helpers/defaultFoto";
 import { useState, useEffect } from "react"
 import { Link, Outlet, useParams, useLocation } from "react-router-dom"
-import css from './MovieDetal.module.css'
+import css from './MovieDetail.module.css'
 
-export const MovieDetal = () => {
+export const MovieDetail = () => {
   const [data, setData] = useState([]);
 
   const location = useLocation();
@@ -66,4 +66,4 @@ export const MovieDetal = () => {
   )
 }
 
-export default MovieDetal;
+export default MovieDetail;

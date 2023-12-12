@@ -4,7 +4,7 @@ import { Loader } from 'components/Loader/Loader';
 import { NavLink, Outlet } from 'react-router-dom';
 import css from './MoviesLayout.module.css';
 
-export const MoviesLayot = () => {
+export const MoviesLayout = () => {
   return (
     <>
       <header className={css.header}>
