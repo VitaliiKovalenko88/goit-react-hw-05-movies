@@ -10,15 +10,15 @@ export const MoviesList = ({ movies }) => {
         <li key={id} className={css.item}>
           <Link to={`/movies/${id}`} state={{ from: pathname }}>
             <div className={css.wrapper}>
-              <img
-                className={css.img}
-                src={
-                  poster_path
-                    ? `https://image.tmdb.org/t/p/w400/${poster_path}`
-                    : defaultImg
-                }
-                alt={title}
-              />
+              {poster_path ? (
+                <img
+                  className={css.img}
+                  src={`https://image.tmdb.org/t/p/w400/${poster_path}`}
+                  alt={title}
+                />
+              ) : (
+                <img className={css.img} src={defaultImg} alt={title} />
+              )}
             </div>
             <p className={css.titleItem}>{title}</p>
           </Link>
